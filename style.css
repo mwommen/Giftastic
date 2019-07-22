@@ -1,0 +1,29 @@
+.form-group {
+    float: right;
+    
+}
+
+h1 {
+    text-align: center;
+    background-color: black;
+    color:white;
+}
+
+.error {
+    color:red;
+    font-size:14px;
+    text-decoration: underline;
+}
+
+.show {
+    display:block;
+}
+
+.hide {
+    display: none;
+}
+
+.success {
+    outline: 0 none;
+    border: 3px solid green;
+}

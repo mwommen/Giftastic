@@ -1,0 +1,167 @@
+<!-- Steps for GifTastic:
+
+// Create buttons in html that using the topics in an array.
+
+//A for loop to run through the array and create buttons
+
+//Make sure “OnClick” that the buttons will produce 10 gif images related to the button selected. 
+ 
+//Commit working code
+
+// Ad a search bar so user input will  create a new button
+
+//Onclick of the new button, return 10 gif images related to the user input. 
+
+//Commit working code 
+
+//OnClick of a gify it begins to move, OnClick again stops the image 
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>giphy</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <!-- <script src='app.js'></script>  -->
+</head>
+<body>
+    <h1>GifTastic Generator</h1>
+
+
+    <div class="button-container"></div>
+
+    <div class="form-group">
+            <label for="search">Button Name:</label>
+            <input type="text" class="form-control" id="add-term">
+             <button type="submit" class="btn btn-default" id="add-btn">
+             <i class="fas fa-plus"></i> Add Button</button>
+             <p class="error hide">Please Enter valid button text</p>
+            </div>
+
+    <div id="gifs-appear-here">
+
+
+
+    </div>
+    
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+
+
+ var topics = ["The-office", "Mindhunter", "Baseball", "Football", "Basketball"];
+
+
+ function genBtns(){
+    $('.button-container').empty();
+     for(var i =0; i < topics.length; i++){
+        var buttonHtml = "<button class='btn-clk' data-person='" + topics[i] + "'>" + topics[i] + "</button>";
+        
+        $('.button-container').append(buttonHtml);
+     }
+
+ }
+
+
+
+$('#add-btn').on('click', function() {
+    var inputVal = $('#add-term').val();
+    if(inputVal){
+        topics.push(inputVal);
+        $('.error').removeClass('show').addClass('hide');
+        $('#add-term').val('');
+        genBtns();
+    }
+    else {
+        console.log('Fail');
+        //here we shoulld show error
+        $('.error').removeClass('hide').addClass('show');
+    }
+});
+//Adding a click listener to all buttons 
+$(document).on("click", '.btn-clk', function() {
+
+    var topics = $(this).attr("data-person");
+
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+    topics + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+
+//Ajax GET request 
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+
+       // After the data comes back from the API
+       .then(function(response) {
+        // Storing an array of results in the results variable
+        var results = response.data;
+
+        // Looping over every result item
+        for (var i = 0; i < results.length; i++) {
+
+          // Only taking action if the photo has an appropriate rating
+          if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+            // Creating a div for the gif
+            var gifDiv = $("<div>");
+
+            //Storing the rating 
+            var rating = results[i].rating;
+
+            //Placing the rating in a p tag 
+            var p = $("<p>").text("Rating: " + rating);
+
+            //Image tag 
+            var personImage = $("<img>");
+
+// Giving the image tag an src attribute of a proprty pulled off the
+              // result item
+              personImage.attr("src", results[i].images.fixed_height.url);
+
+  // Appending the paragraph and personImage we created to the "gifDiv" div we created
+gifDiv.append(p);
+gifDiv.append(personImage);
+
+ // Appending the paragraph and personImage we created to the "gifDiv" div we created
+$("#gifs-appear-here").prepend(gifDiv);
+            }
+        }
+
+          });
+        });
+
+ var queryParams = { "api-key": "R1a31F4tBjCUaM2ho8GtIFsrSdtXt30M" };
+
+
+
+
+
+
+
+
+    genBtns();
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
