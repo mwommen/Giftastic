@@ -1,22 +1,3 @@
-<!-- Steps for GifTastic:
-
-// Create buttons in html that using the topics in an array.
-
-//A for loop to run through the array and create buttons
-
-//Make sure “OnClick” that the buttons will produce 10 gif images related to the button selected. 
- 
-//Commit working code
-
-// Ad a search bar so user input will  create a new button
-
-//Onclick of the new button, return 10 gif images related to the user input. 
-
-//Commit working code 
-
-//OnClick of a gify it begins to move, OnClick again stops the image 
- -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +5,9 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>giphy</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
      <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
-    <!-- <script src='app.js'></script>  -->
+     <script src='app.js'></script>  
 </head>
 <body>
     <h1>GifTastic Generator</h1>
@@ -33,31 +15,23 @@
 
     <div class="button-container"></div>
 
+
     <div class="form-group">
-            <label for="search">Button Name:</label>
+            <!-- <label for="search" class="btnName">Button Name:</label> -->
             <input type="text" class="form-control" id="add-term">
-             <button type="submit" class="btn btn-default" id="add-btn">
-             <i class="fas fa-plus"></i> Add Button</button>
+             <button type="submit" class="btn btn-default" id="add-btn">Add Button</button>
              <p class="error hide">Please Enter valid button text</p>
             </div>
+    <div id="gifs-appear-here"> </div>
 
-    <div id="gifs-appear-here">
-
-
-
-    </div>
-    
-    
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 
+ var topics = ["The Office", "Mindhunter", "Baseball", "Football", "Basketball"];
 
-
- var topics = ["The-office", "Mindhunter", "Baseball", "Football", "Basketball"];
-
-
+ //Generating buttons for each index of the array 
  function genBtns(){
     $('.button-container').empty();
      for(var i =0; i < topics.length; i++){
@@ -69,7 +43,7 @@
  }
 
 
-
+//Adding a button for the term inputted 
 $('#add-btn').on('click', function() {
     var inputVal = $('#add-term').val();
     if(inputVal){
@@ -117,47 +91,24 @@ $(document).on("click", '.btn-clk', function() {
             //Placing the rating in a p tag 
             var p = $("<p>").text("Rating: " + rating);
 
-            //Image tag 
             var personImage = $("<img>");
 
-// Giving the image tag an src attribute of a proprty pulled off the
-              // result item
-              personImage.attr("src", results[i].images.fixed_height.url);
+             personImage.attr("src", results[i].images.fixed_height.url);
 
-  // Appending the paragraph and personImage we created to the "gifDiv" div we created
+  // Appending the paragraph and personImage created to the "gifDiv" div 
 gifDiv.append(p);
 gifDiv.append(personImage);
 
- // Appending the paragraph and personImage we created to the "gifDiv" div we created
+ // Appending the paragraph and personImage created to the "gifDiv" div 
 $("#gifs-appear-here").prepend(gifDiv);
             }
         }
-
-          });
-        });
+     });
+});
 
  var queryParams = { "api-key": "R1a31F4tBjCUaM2ho8GtIFsrSdtXt30M" };
-
-
-
-
-
-
-
-
+ //Calling the genBtns function
     genBtns();
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 
