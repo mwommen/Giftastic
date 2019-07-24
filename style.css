@@ -1,5 +1,6 @@
 body {
     background-color:  rgba(50, 115, 220, 0.3);
+    font-family: 'Dekko';font-size: 22px;
 }
 
 
@@ -12,6 +13,11 @@ h1 {
     text-align: center;
     background-color: black;
     color:white;
+}
+
+h1:hover {
+    background-color: bisque;
+    color: blue;
 }
 
 .error {
@@ -37,9 +43,11 @@ h1 {
   margin: 20px;
   padding:25px;
   margin-left:10px;
-font-size: 15px;
-  
+font-size: 20px;
+
 }
+
+
 
  .form-group {
      padding-right: 25px;
@@ -47,7 +55,7 @@ font-size: 15px;
 
  #gifs-appear-here {
      padding: 25px;
-     
+     font-size: 25px;
  }
 
  #add-btn {
@@ -57,10 +65,39 @@ font-size: 15px;
 
  }
 
+ 
+ #add-btn:hover {
+    background-color: red; /* Green */
+    color: white;
+  }
+
+
+
  .btnName {
     background-color: black;
     color: white;
  }
 
+
+
+ 
+ @media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="col-12"] {
+      width: 100%;
+    }
+    #gifs-appear-here {
+        padding: 25px;
+        font-size: 25px;
+        position: relative;
+    }
+
+  }
 
 

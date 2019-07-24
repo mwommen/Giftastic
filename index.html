@@ -6,25 +6,25 @@
     <title>giphy</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
-     <script src='app.js'></script>  
+    <link href='https://fonts.googleapis.com/css?family=Dekko' rel='stylesheet'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+       
 </head>
 <body>
     <h1>GifTastic Generator</h1>
 
 
-    <div class="button-container"></div>
+     <div class="button-container"></div> 
 
 
     <div class="form-group">
-            <!-- <label for="search" class="btnName">Button Name:</label> -->
             <input type="text" class="form-control" id="add-term">
              <button type="submit" class="btn btn-default" id="add-btn">Add Button</button>
              <p class="error hide">Please Enter valid button text</p>
             </div>
     <div id="gifs-appear-here"> </div>
 
-    
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -76,12 +76,9 @@ $(document).on("click", '.btn-clk', function() {
        .then(function(response) {
         // Storing an array of results in the results variable
         var results = response.data;
-
-        // Looping over every result item
+console.log(results)
         for (var i = 0; i < results.length; i++) {
-
-          // Only taking action if the photo has an appropriate rating
-          if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+          if (results[i].rating !== "r") {
             // Creating a div for the gif
             var gifDiv = $("<div>");
 
@@ -95,11 +92,11 @@ $(document).on("click", '.btn-clk', function() {
 
              personImage.attr("src", results[i].images.fixed_height.url);
 
-  // Appending the paragraph and personImage created to the "gifDiv" div 
+
+
 gifDiv.append(p);
 gifDiv.append(personImage);
 
- // Appending the paragraph and personImage created to the "gifDiv" div 
 $("#gifs-appear-here").prepend(gifDiv);
             }
         }
